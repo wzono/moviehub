@@ -1,7 +1,6 @@
 import React from 'react';
 import { Animated, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
-import AppButton from "./AppButton";
 
 class TouchableScale extends React.PureComponent {
   constructor(props) {

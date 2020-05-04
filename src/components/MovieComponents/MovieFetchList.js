@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import FooterLoading from '../FooterLoading';
 import MovieList from './MovieList';
 import withRefetch from '../hoc/withRefetch';
@@ -16,7 +16,8 @@ class MoviesFetchList extends React.Component {
   };
 
   _isMounted = false
-  componentWillUnmount(){
+
+  componentWillUnmount() {
     this._isMounted = false
   }
 
@@ -61,7 +62,7 @@ class MoviesFetchList extends React.Component {
       const data = await refetchAction(() => fetchFunction({ start: 0 }));
       this.start = start;
       this.total = data.total;
-       this.setState({ movies: [...data.movies], isInitialLoading: false, refreshing: false });
+      this.setState({ movies: [...data.movies], isInitialLoading: false, refreshing: false });
     } catch (error) {
       console.log(error)
       this.setState({ refreshing: false });
@@ -81,7 +82,7 @@ class MoviesFetchList extends React.Component {
     if (movies === moviesBeforeFetch) {
       moviesProps.movies = filterDuplicateMovies([...movies, ...data.movies]);
       this.start += 20;
-      this.total= data.total;
+      this.total = data.total;
     }
     this.setState({ isPaginationLoading: false, ...moviesProps });
   }
@@ -95,7 +96,7 @@ class MoviesFetchList extends React.Component {
 
   renderListFooter = () => {
     const { isPaginationLoading } = this.state;
-    return isPaginationLoading ? <FooterLoading /> : null;
+    return isPaginationLoading ? <FooterLoading/> : null;
   };
 
   renderMovieList = () => {
@@ -104,10 +105,10 @@ class MoviesFetchList extends React.Component {
     const refreshProps = withRefresh ? { refreshing, onRefresh: this.onRefresh } : {};
     const paginationProps = withPagination
       ? {
-          onEndReached: this.onListEndReached,
-          onEndReachedThreshold: 3,
-          extraData: isPaginationLoading
-        }
+        onEndReached: this.onListEndReached,
+        onEndReachedThreshold: 3,
+        extraData: isPaginationLoading
+      }
       : {};
 
     return (

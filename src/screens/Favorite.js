@@ -26,6 +26,7 @@ class FavoriteScreen extends Component {
 
     registerUpdateEvent = () => {
         EventBus.getInstance().addListener(EventNames.FavoriteUpdate, this.listener = () => {
+            console.log(1)
             requestAnimationFrame(() => this.initialFavorites(false))
         })
     }

@@ -1,4 +1,4 @@
-import { Linking, Image } from 'react-native';
+import { Linking } from 'react-native';
 import Config from '../Config';
 
 export const safeOpenURL = url => {

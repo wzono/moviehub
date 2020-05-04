@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getCategoryListUrl, getMovieEnumUrl, getMovieListUrl, getSearchMoviesUrl } from "./urls";
+import { getCategoryListUrl, getMovieDetailUrl, getMovieEnumUrl, getMovieListUrl, getSearchMoviesUrl } from "./urls";
 import Config from "../Config";
 import { parseMoviesArray } from "../utils/movies";
 
@@ -13,11 +13,26 @@ export const getSearchFetchFunctionFromQuery = query => ({ start }) =>
 
 export const getCategoryFetchFunctionFromSelect = (select) => ({ start }) => fetchCategoryList(select, { start })
 
+export function fetchMovieDetail(id) {
+  return new Promise(async (resolve, reject) => {
+    const url = getMovieDetailUrl({ id })
+    try {
+      const {data} = await axios.get(url)
+      const body = await getBody(data)
+      resolve(body)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
 export function fetchCategoryList(select, { start }) {
   return new Promise(async (resolve, reject) => {
     const url = getCategoryListUrl({ ...select, start })
     try {
       const { data } = await axios.get(url);
+      console.log(url)
+      console.log(data)
       const body = await getBody(data)
       addParsedMoviesToData(body)
       resolve(body);
@@ -124,6 +139,8 @@ export function getFavorites() {
 export function fetchMovieByIds(ids = []) {
   return new Promise(async (resolve, reject) => {
     ids = Array.isArray(ids) ? ids : [ids]
+    ids = ids.map(id => id + '')
+
     try {
       const url = getMovieListUrl()
       const { data } = await axios({ url, method: 'post', data: { ids } })
@@ -137,7 +154,7 @@ export function fetchMovieByIds(ids = []) {
 
 
 function addParsedMoviesToData(data) {
-  data.movies = parseMoviesArray(data.subjects)
+  data.movies = parseMoviesArray(data.subjects || [])
 }
 
 function getBody(data = {}) {

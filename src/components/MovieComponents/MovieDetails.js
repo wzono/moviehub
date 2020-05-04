@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, StyleSheet, LayoutAnimation, Alert } from 'react-native';
 import { AppText } from '../common';
 import MovieBackdropWithTitle from './MovieBackdropWithTitle';
 import MovieDetailsButtons from './MovieDetailsButtons';
@@ -12,12 +12,13 @@ import { MoviePreview as MoviePreViewClass } from './MoviePreview';
 import MovieSummary from "./MovieSummary";
 import MovieMakers from "./MovieMakers";
 import MovieTitles from "./MovieTitles";
+import { fetchMovieDetail } from "../../services/movies";
 
 
 class MovieDetails extends React.PureComponent {
   state = {
     recommendedMovies: [],
-    movie: {}
+    movieDetail: {},
   };
 
   componentDidMount() {
@@ -25,8 +26,11 @@ class MovieDetails extends React.PureComponent {
   }
 
   loadDetailedInfo = async () => {
-    this.configureDetailsAnimation();
-    this.setState({ movie: this.props.movie})
+    const { refetch: { fetchUntilSuccess }, movie} = this.props
+    fetchUntilSuccess(() => fetchMovieDetail(movie.id)).then(res => {
+      this.setState({ movieDetail: res})
+      this.configureDetailsAnimation();
+    })
   };
 
   configureDetailsAnimation() {
@@ -51,22 +55,22 @@ class MovieDetails extends React.PureComponent {
   }
 
   render() {
-    const { movie } = this.state;
-    const { movie: movieInfo } = this.props
+    const { movieDetail } = this.state;
+    const { movie } = this.props
     return (
       <View style={styles.container}>
-        <MovieBackdropWithTitle movie={movieInfo} />
+        <MovieBackdropWithTitle movie={movie} />
         <View style={styles.mh}>
-          <MovieScoreYear style={styles.mb} movie={movieInfo} />
-          {!!movie.genres?.length && <MovieGenres style={styles.mb} movie={movie} />}
-          {!!movie.regions?.length && <MovieRegions style={styles.mb} movie={movie} />}
-          <MovieDetailsButtons movie={movieInfo} />
+          <MovieScoreYear style={styles.mb} movie={movie} />
+          {!!movieDetail.genres?.length && <MovieGenres style={styles.mb} movie={movieDetail} />}
+          {!!movieDetail.regions?.length && <MovieRegions style={styles.mb} movie={movieDetail} />}
+          <MovieDetailsButtons movie={movie} />
           <AppText type="headline">Overview</AppText>
-          <MovieSummary title="Douban" content={movieInfo.douban_summary} />
-          <MovieSummary title="IMDb" content={movie.imdb_summary} />
+          <MovieSummary title="Douban" content={movieDetail.douban_summary} />
+          <MovieSummary title="IMDb" content={movieDetail.imdb_summary} />
           <AppText style={styles.bigTitle} type="headline">Movie Makers</AppText>
-          <MovieMakers movie={movie} />
-          <MovieTitles movie={movie} />
+          <MovieMakers movie={movieDetail} />
+          <MovieTitles movie={movieDetail} />
         </View>
       </View>
     );

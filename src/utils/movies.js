@@ -1,6 +1,6 @@
 export const movieKeyExtractor = movie => movie.id.toString();
 
-export const parseMoviesArray = movies =>
+export const parseMoviesArray = (movies = []) =>
   movies.filter(movie => isEnoughInfo(movie))
 
 export const filterDuplicateMovies = movies =>
@@ -17,7 +17,7 @@ export const parseReleaseDate = (date) => {
 
 // Local functions
 
-const movieRequiredProps = ['pub_year', 'title', 'cover', 'douban_summary'];
+const movieRequiredProps = ['pub_year', 'title', 'cover'];
 const isEnoughInfo = movie => {
   let isCorrect = true;
   for (let prop of movieRequiredProps) {
