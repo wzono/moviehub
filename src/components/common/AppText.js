@@ -10,7 +10,7 @@ const AppText = props => {
   const textStyles = [styles.text, Theme.typography[type], style];
 
   return (
-    <Text {...props} style={textStyles}>
+    <Text {...props} style={textStyles} >
       {children}
     </Text>
   );

@@ -1,4 +1,5 @@
 export const movieKeyExtractor = movie => movie.id.toString();
+export const reviewKeyExtractor = review => review.id.toString();
 
 export const parseMoviesArray = (movies = []) =>
   movies.filter(movie => isEnoughInfo(movie))
@@ -8,6 +9,11 @@ export const filterDuplicateMovies = movies =>
     (movie, index) =>
       index === movies.findIndex(m => movieKeyExtractor(m) === movieKeyExtractor(movie))
   );
+
+export const filterDuplicateReviews = reviews =>
+  reviews.filter(
+    (review, index) => index === reviews.findIndex(r => reviewKeyExtractor(r) === reviewKeyExtractor(review))
+  )
 
 export const parseReleaseDate = (date) => {
   const d = new Date(date)

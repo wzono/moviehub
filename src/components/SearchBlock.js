@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   labelWrapper: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'

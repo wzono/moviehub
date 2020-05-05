@@ -7,12 +7,13 @@ import MovieGenres from './MovieGenres';
 import MovieRegions from './MovieRegions'
 import MovieScoreYear from './MovieScoreYear';
 import withRefetch from '../hoc/withRefetch';
-import Theme from '../../Theme';
 import { MoviePreview as MoviePreViewClass } from './MoviePreview';
+import Theme from '../../Theme';
 import MovieSummary from "./MovieSummary";
 import MovieMakers from "./MovieMakers";
 import MovieTitles from "./MovieTitles";
-import { fetchMovieDetail } from "../../services/movies";
+import { fetchMovieDetail, getReviewFetchFunctionFromId } from "../../services/movies";
+import ReviewFetchList from "./ReviewFetchList";
 
 
 class MovieDetails extends React.PureComponent {
@@ -26,9 +27,9 @@ class MovieDetails extends React.PureComponent {
   }
 
   loadDetailedInfo = async () => {
-    const { refetch: { fetchUntilSuccess }, movie} = this.props
+    const { refetch: { fetchUntilSuccess }, movie } = this.props
     fetchUntilSuccess(() => fetchMovieDetail(movie.id)).then(res => {
-      this.setState({ movieDetail: res})
+      this.setState({ movieDetail: res })
       this.configureDetailsAnimation();
     })
   };
@@ -57,6 +58,7 @@ class MovieDetails extends React.PureComponent {
   render() {
     const { movieDetail } = this.state;
     const { movie } = this.props
+    const reviewFetchFunc = getReviewFetchFunctionFromId(movie.id)
     return (
       <View style={styles.container}>
         <MovieBackdropWithTitle movie={movie} />
@@ -71,6 +73,8 @@ class MovieDetails extends React.PureComponent {
           <AppText style={styles.bigTitle} type="headline">Movie Makers</AppText>
           <MovieMakers movie={movieDetail} />
           <MovieTitles movie={movieDetail} />
+          <View style={styles.reviewWrapper}>
+          </View>
         </View>
       </View>
     );
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
     height: MoviePreViewClass.getPreviewHeight(),
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
 });
 
 export default withRefetch(MovieDetails);

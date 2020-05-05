@@ -78,7 +78,6 @@ class Browse extends Component {
     BROWSE_SECTIONS.forEach(section =>
       fetchUntilSuccess(() => section.fetchFunction({ start: 0 })).then(data => {
         const { sectionsMovies } = this.state;
-        console.log(data)
         const newSections = {
           ...sectionsMovies,
           [section.title]: data.movies

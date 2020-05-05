@@ -13,6 +13,7 @@ import { getFontStyleObject } from "./utils/font";
 import { getNavbarBrowseIcon, getNavbarCategoryIcon, getNavbarFavorIcon } from "./utils/icons";
 import NavbarWrapper from "./components/NavbarWrapper";
 import NavbarButtonWrapper from "./components/NavbarButtonWrapper";
+import MovieReviewScreen from "./screens/movie/MovieReviewScreen";
 
 const defaultHeaderObject = {
   header: props => <Header scene={props.scene}/>
@@ -39,15 +40,19 @@ const BottomTabs = createBottomTabNavigator({
     [TabNames.browse]: createDefaultStackNavigator({
       Browse,
       [RouteNames.MovieListScreen]: MovieListScreen,
-      [RouteNames.MovieDetailScreen]: MovieDetailScreen
+      [RouteNames.MovieDetailScreen]: MovieDetailScreen,
+      [RouteNames.MovieReviewScreen]: MovieReviewScreen,
     }),
     [TabNames.category]: createDefaultStackNavigator({
       Category,
-      [RouteNames.MovieDetailScreen]: MovieDetailScreen
+      [RouteNames.MovieDetailScreen]: MovieDetailScreen,
+      [RouteNames.MovieReviewScreen]: MovieReviewScreen,
+
     }),
     [TabNames.favor]: createDefaultStackNavigator({
       Favorite,
-      [RouteNames.MovieDetailScreen]: MovieDetailScreen
+      [RouteNames.MovieDetailScreen]: MovieDetailScreen,
+      [RouteNames.MovieReviewScreen]: MovieReviewScreen,
     })
   },
   {

@@ -5,11 +5,13 @@ import { IconButton } from '../common';
 import withRefetch from '../hoc/withRefetch';
 import { getIMDbLink, getDoubanLink } from '../../services/urls';
 import { safeOpenURL } from '../../utils/network';
-import {  getAddToFavoritesIcon, getOpenImdbIcon, getOpenDoubanIcon } from '../../utils/icons';
+import { getAddToFavoritesIcon, getOpenImdbIcon, getOpenDoubanIcon, getOpenReviewIcon } from '../../utils/icons';
 import Theme from '../../Theme';
-import { add2Favorites, isInFavorites, removeFromFavorites } from "../../services/movies";
+import { add2Favorites, getReviewFetchFunctionFromId, isInFavorites, removeFromFavorites } from "../../services/movies";
 import EventBus from "react-native-event-bus";
 import EventNames from '../../EventNames'
+import withNavigationOnce from "../hoc/withNavigationOnce";
+import RouteNames from "../../RouteNames";
 class MovieDetailsButtons extends React.PureComponent {
   state = {
     inFavorite: false,
@@ -58,6 +60,12 @@ class MovieDetailsButtons extends React.PureComponent {
     safeOpenURL(getDoubanLink(movie.douban_id));
   }
 
+  openReview = () => {
+    const { navigateOnce, movie } = this.props;
+    const fetchFunc = getReviewFetchFunctionFromId(movie.id)
+    navigateOnce(RouteNames.MovieReviewScreen, { movie, fetchFunction: fetchFunc });
+  }
+
   render() {
     const { movie } = this.props;
     const { inFavorite, isFavoriteFetching } = this.state;
@@ -86,7 +94,12 @@ class MovieDetailsButtons extends React.PureComponent {
           Icon={getOpenImdbIcon({ disabled: imdbDisabled })}
           text="IMDb"
         />
-
+        <IconButton
+          style={styles.iconButton}
+          onPress={this.openReview}
+          Icon={getOpenReviewIcon()}
+          text="影评"
+        />
       </View>
     );
   }
@@ -111,4 +124,4 @@ MovieDetailsButtons.propTypes = {
 };
 
 
-export default withRefetch(MovieDetailsButtons);
+export default withNavigationOnce(withRefetch(MovieDetailsButtons));

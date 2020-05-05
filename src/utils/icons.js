@@ -21,13 +21,6 @@ const { tiny } = Theme.spacing;
 // ------------------------------------------------------
 // MovieDetailsButtons
 // ------------------------------------------------------
-export const getAddToWatchlistIcon = ({ inWatchlist }) => (
-  <IconMaterialIcons
-    name={inWatchlist ? 'playlist-add-check' : 'playlist-add'}
-    color={inWatchlist ? primaryColor : lightestColor}
-    size={iconSize}
-  />
-);
 
 export const getAddToFavoritesIcon = ({ inFavorite }) => (
   <IconMaterialIcons
@@ -38,13 +31,12 @@ export const getAddToFavoritesIcon = ({ inFavorite }) => (
 );
 
 export const getOpenDoubanIcon = ({ disabled }) => (
-    <IconMaterialCommunityIcons
-        name="movie"
-        color={disabled ? lightColor : lightestColor}
-        size={iconSize}
-    />
+  <IconMaterialCommunityIcons
+    name="movie"
+    color={disabled ? lightColor : lightestColor}
+    size={iconSize}
+  />
 )
-
 
 
 export const getOpenImdbIcon = ({ disabled }) => (
@@ -54,6 +46,11 @@ export const getOpenImdbIcon = ({ disabled }) => (
     size={iconSize}
   />
 );
+
+export const getOpenReviewIcon = ()  => (
+  <IconMaterialCommunityIcons name="comment" color={lighterColor } size={iconSize} />
+)
+
 
 // ------------------------------------------------------
 // MovieSearchResults
@@ -66,12 +63,6 @@ export const getInitialSearchIcon = () => (
   <IconEvilIcons name="search" color={lightestColor} size={hugeIconSize} />
 );
 
-// ------------------------------------------------------
-// GuestInfo
-// ------------------------------------------------------
-export const getGuestInfoIcon = () => (
-  <IconFeather name="user" color={lightestColor} size={hugeIconSize} />
-);
 
 // ------------------------------------------------------
 // SearchInput
@@ -100,16 +91,15 @@ export const getMovieListEmptyIcon = () => (
   <IconAntDesign name="smileo" color={lightestColor} size={hugeIconSize} />
 );
 
+
+
 // ------------------------------------------------------
-// MovieCard
+// ReviewList
 // ------------------------------------------------------
-export const getMovieCardChevron = isChevronUp => (
-  <IconEntypo
-    name={isChevronUp ? 'chevron-up' : 'chevron-down'}
-    size={largeIconSize * 0.95}
-    color={lightestColor}
-  />
-);
+export const getReviewListEmptyIcon = () => (
+  <IconAntDesign name="smileo" color={lightestColor} size={hugeIconSize} />
+)
+
 
 
 // ------------------------------------------------------
@@ -158,3 +148,7 @@ export const getNavbarCategoryIcon = ({ tintColor }) => (
 export const getNavbarFavorIcon = ({ tintColor }) => (
   <IconFeather name="heart" color={tintColor} size={iconSize * 0.85} />
 );
+
+export const getUsefulCountIcon = ()  => (
+  <IconFeather name="chevron-up" color={lightColor} size={smallIconSize} />
+)

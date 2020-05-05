@@ -22,7 +22,7 @@ DerivedData
 *.xcuserstate
 
 # 发布的key文件
-release-key.keystore
+*/release-key.keystore
 # Android/IntelliJ
 #
 build/
