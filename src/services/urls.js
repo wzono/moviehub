@@ -7,7 +7,7 @@ export const SORT = {
     Highest: "1",
 }
 
-export const BASE_URL = `http://192.168.0.104:8080/v1/api`
+export const BASE_URL = `http://wingsico.org:8080/v1/api`
 export const IMDB_URL = `https://www.imdb.com/title`
 export const DOUBAN_URL = `https://movie.douban.com/subject`
 
