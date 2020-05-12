@@ -100,6 +100,14 @@ export const getReviewListEmptyIcon = () => (
   <IconAntDesign name="smileo" color={lightestColor} size={hugeIconSize} />
 )
 
+export const getReviewUsefulIcon = () => (
+  <IconMaterialIcons
+    name="favorite"
+    color={primaryColor}
+    size={iconSize}
+  />
+)
+
 
 
 // ------------------------------------------------------

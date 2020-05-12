@@ -100,7 +100,7 @@ class ReviewFetchList extends React.Component {
   };
 
   renderReviewList = () => {
-    const { withRefresh, withPagination, ...props } = this.props;
+    const { withRefresh, withPagination, title, ...props } = this.props;
     const { reviews, refreshing, isPaginationLoading } = this.state;
     const refreshProps = withRefresh ? { refreshing, onRefresh: this.onRefresh } : {};
     const paginationProps = withPagination
@@ -114,6 +114,7 @@ class ReviewFetchList extends React.Component {
     return (
       <ReviewList
         reviews={reviews}
+        title={title}
         ListFooterComponent={this.renderListFooter}
         {...refreshProps}
         {...paginationProps}
@@ -142,6 +143,7 @@ const styles = StyleSheet.create({
 
 ReviewFetchList.propTypes = {
   fetchFunction: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
   withRefresh: PropTypes.bool,
   withPagination: PropTypes.bool
 };

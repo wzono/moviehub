@@ -19,10 +19,10 @@ class ReviewList extends React.PureComponent {
     return renderEmptyComponent ? renderEmptyComponent() : this.renderEmptyDefault();
   };
 
-  renderReview = ({ item: review }) => <ReviewListItem review={review} />;
+  renderReview = ({ item: review }, title) => <ReviewListItem review={review} title={title} />;
 
   renderReviewList = () => {
-    const { reviews, ...props } = this.props;
+    const { reviews, title, ...props } = this.props;
 
     return (
       <FlatList
@@ -30,7 +30,7 @@ class ReviewList extends React.PureComponent {
         style={styles.list}
         initialNumToRender={20}
         maxToRenderPerBatch={20}
-        renderItem={this.renderReview}
+        renderItem={item => this.renderReview(item, title)}
         keyExtractor={reviewKeyExtractor}
         {...props}
       />
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 
 ReviewList.propTypes = {
   reviews: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
   renderEmptyComponent: PropTypes.func,
   emptyText: PropTypes.string,
   emptySubtext: PropTypes.string

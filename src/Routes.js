@@ -14,6 +14,7 @@ import { getNavbarBrowseIcon, getNavbarCategoryIcon, getNavbarFavorIcon } from "
 import NavbarWrapper from "./components/NavbarWrapper";
 import NavbarButtonWrapper from "./components/NavbarButtonWrapper";
 import MovieReviewScreen from "./screens/movie/MovieReviewScreen";
+import MovieReviewDetailScreen from "./screens/movie/MovieReviewDetailScreen";
 
 const defaultHeaderObject = {
   header: props => <Header scene={props.scene}/>
@@ -42,17 +43,20 @@ const BottomTabs = createBottomTabNavigator({
       [RouteNames.MovieListScreen]: MovieListScreen,
       [RouteNames.MovieDetailScreen]: MovieDetailScreen,
       [RouteNames.MovieReviewScreen]: MovieReviewScreen,
+      [RouteNames.MovieReviewDetailScreen]: MovieReviewDetailScreen
     }),
     [TabNames.category]: createDefaultStackNavigator({
       Category,
       [RouteNames.MovieDetailScreen]: MovieDetailScreen,
       [RouteNames.MovieReviewScreen]: MovieReviewScreen,
+      [RouteNames.MovieReviewDetailScreen]: MovieReviewDetailScreen
 
     }),
     [TabNames.favor]: createDefaultStackNavigator({
       Favorite,
       [RouteNames.MovieDetailScreen]: MovieDetailScreen,
       [RouteNames.MovieReviewScreen]: MovieReviewScreen,
+      [RouteNames.MovieReviewDetailScreen]: MovieReviewDetailScreen
     })
   },
   {

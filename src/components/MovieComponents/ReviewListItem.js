@@ -6,28 +6,20 @@ import { AppButton, AppText } from '../common';
 import Theme from '../../Theme';
 import { parseReleaseDate } from '../../utils/movies'
 import { getUsefulCountIcon } from "../../utils/icons";
-import { unescape } from '../../utils/utils'
+import { unescapeEntity } from '../../utils/utils'
+import RouteNames from "../../RouteNames";
+import withNavigationOnce from "../hoc/withNavigationOnce";
 
 class ReviewListItem extends React.Component {
-  state = {
-    toShowDetail: false,
-    showMore: true,
-  }
-
   onPress = () => {
-    this.state.showMore && this.setState({ toShowDetail: !this.state.toShowDetail });
+    const { review, navigateOnce, title } = this.props;
+    navigateOnce(RouteNames.MovieReviewDetailScreen, { review, title });
   };
-
-  formatContent = (str) => {
-    return unescape(str.split('\n').map(s => s.trim()).filter(v => v).join('\n\n'))
-  }
 
 
   render() {
     const { review } = this.props;
-    const { toShowDetail, showMore } = this.state;
-    const NUM_OF_LINES = toShowDetail ? 0 : 3
-    const buttonText = toShowDetail ? '收起' : '展开'
+    const buttonText = '查看详情'
 
     return (
       <View
@@ -37,23 +29,15 @@ class ReviewListItem extends React.Component {
           <AppText type="subTitle" numberOfLines={1} style={styles.user}>
             {review.author}
           </AppText>
-          <ReviewUserScore review={review}/>
+          <ReviewUserScore review={review} />
         </View>
         <View style={styles.lineWrapper}>
           <AppText type="headline" style={styles.title}>
             {review.title.trim()}
           </AppText>
         </View>
-        <AppText
-          style={styles.content}
-          numberOfLines={NUM_OF_LINES}
-          onTextLayout={({ nativeEvent: { lines } }) =>
-            this.setState({ showMore: lines.length > NUM_OF_LINES })
-          }
-        >
-          {this.formatContent(review.content)}
-        </AppText>
-        {showMore && <AppButton toScale={false} onlyText onPress={this.onPress} style={styles.button}>{buttonText}</AppButton>}
+        <AppText style={styles.content}>{unescapeEntity(review.content)}</AppText>
+        <AppButton toScale={false} onlyText onPress={this.onPress} style={styles.button}>{buttonText}</AppButton>
         <View style={styles.lineWrapper}>
           <AppText style={{ color: Theme.gray.light }}>
             {parseReleaseDate(review.created_at)}
@@ -95,7 +79,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'flex-start',
-    paddingTop: Theme.spacing.tiny,
   },
 });
 
@@ -103,4 +86,4 @@ ReviewListItem.propTypes = {
   review: PropTypes.object.isRequired
 };
 
-export default ReviewListItem;
+export default withNavigationOnce(ReviewListItem);

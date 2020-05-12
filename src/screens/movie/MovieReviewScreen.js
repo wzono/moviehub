@@ -14,10 +14,12 @@ class MovieReviewScreen extends React.Component {
   }
 
   render() {
-    const { fetchFunction } = this.props;
+    const { fetchFunction, navigation } = this.props;
+    const movie = navigation.getParam('movie') || {}
+    const title = movie.title || " "
     return (
       <View style={styles.container}>
-        <ReviewFetchList fetchFunction={fetchFunction} />
+        <ReviewFetchList fetchFunction={fetchFunction} title={title} />
       </View>
     );
   }

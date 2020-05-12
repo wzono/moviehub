@@ -5,7 +5,8 @@ import {
   getMovieEnumUrl,
   getMovieListUrl,
   getReviewsUrl,
-  getSearchMoviesUrl
+  getSearchMoviesUrl,
+  getMovieReviewDetailUrl
 } from "./urls";
 import Config from "../Config";
 import { parseMoviesArray } from "../utils/movies";
@@ -38,6 +39,19 @@ export function fetchMovieDetail(id) {
 export function fetchMovieReviews(id, { start }) {
   return new Promise(async (resolve, reject) => {
     const url = getReviewsUrl({ id, start })
+    try {
+      const { data } = await axios.get(url)
+      const body = await getBody(data)
+      resolve(body)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+export function fetchMovieReviewDetail(id) {
+  return new Promise(async (resolve, reject) => {
+    const url = getMovieReviewDetailUrl({ id })
     try {
       const { data } = await axios.get(url)
       const body = await getBody(data)

@@ -7,7 +7,7 @@ export const SORT = {
     Highest: "1",
 }
 
-export const BASE_URL = `http://wingsico.org:8080/v1/api`
+export const BASE_URL = __DEV__ ? `http://192.168.1.101:8080/v1/api` : `http://wingsico.org:8080/v1/api`
 export const IMDB_URL = `https://www.imdb.com/title`
 export const DOUBAN_URL = `https://movie.douban.com/subject`
 
@@ -24,7 +24,7 @@ export const getDoubanLink = (douban_id) => `${DOUBAN_URL}/${douban_id}`
 export const getMovieListUrl = () => `${withBase('/movie/list/ids')}`
 export const getMovieEnumUrl = () => `${withBase('/constants')}`
 export const getMovieDetailUrl = ({ id }) => `${withBase('/movie')}?id=${id}`
-
+export const getMovieReviewDetailUrl = ({id}) => `${withBase('/movie/review')}?id=${id}`
 
 export const getReviewsUrl = ({ start, id }) => `${withBase('/movie/review/list')}?start=${start}&id=${id}`
 function withBase(path) {

@@ -4,4 +4,5 @@ export default {
     MovieDetailScreen: 'MovieDetailScreen',
     BottomTabs: 'BottomTabs',
     MovieReviewScreen: 'MovieReviewScreen',
+    MovieReviewDetailScreen: 'MovieReviewDetailScreen'
 }

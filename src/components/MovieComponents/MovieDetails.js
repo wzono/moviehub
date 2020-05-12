@@ -7,18 +7,15 @@ import MovieGenres from './MovieGenres';
 import MovieRegions from './MovieRegions'
 import MovieScoreYear from './MovieScoreYear';
 import withRefetch from '../hoc/withRefetch';
-import { MoviePreview as MoviePreViewClass } from './MoviePreview';
 import Theme from '../../Theme';
 import MovieSummary from "./MovieSummary";
 import MovieMakers from "./MovieMakers";
 import MovieTitles from "./MovieTitles";
-import { fetchMovieDetail, getReviewFetchFunctionFromId } from "../../services/movies";
-import ReviewFetchList from "./ReviewFetchList";
+import { fetchMovieDetail } from "../../services/movies";
 
 
 class MovieDetails extends React.PureComponent {
   state = {
-    recommendedMovies: [],
     movieDetail: {},
   };
 
@@ -44,21 +41,9 @@ class MovieDetails extends React.PureComponent {
     });
   }
 
-  configureRecommendationsAnimation() {
-    const { opacity } = LayoutAnimation.Properties;
-    const type = LayoutAnimation.Types.easeOut;
-
-    LayoutAnimation.configureNext({
-      duration: 250,
-      create: { type, property: opacity },
-      delete: { type, property: opacity }
-    });
-  }
-
   render() {
     const { movieDetail } = this.state;
     const { movie } = this.props
-    const reviewFetchFunc = getReviewFetchFunctionFromId(movie.id)
     return (
       <View style={styles.container}>
         <MovieBackdropWithTitle movie={movie} />
@@ -94,12 +79,6 @@ const styles = StyleSheet.create({
   },
   mh: {
     marginHorizontal: Theme.spacing.small
-  },
-  noMoviesContainer: {
-    width: '100%',
-    height: MoviePreViewClass.getPreviewHeight(),
-    justifyContent: 'center',
-    alignItems: 'center'
   },
 });
 
