@@ -13,7 +13,7 @@
     "@react-native-community/async-storage": "^1.9.0",
     "@react-native-community/masked-view": "^0.1.9",
     "axios": "^0.19.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "prop-types": "^15.6.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
