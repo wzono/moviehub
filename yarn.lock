@@ -4720,10 +4720,10 @@ react-native-fade-in-view@^1.0.6:
   resolved "https://registry.npm.taobao.org/react-native-fade-in-view/download/react-native-fade-in-view-1.0.6.tgz#e7a153b2adf3ba2d11b10d81cb69c601d0cb25ec"
   integrity sha1-56FTsq3zui0RsQ2By2nGAdDLJew=
 
-react-native-fast-image@^8.1.5:
-  version "8.1.5"
-  resolved "https://registry.npm.taobao.org/react-native-fast-image/download/react-native-fast-image-8.1.5.tgz#0a6404c988dad68c98d26f91155d0a5293ba2ea5"
-  integrity sha1-CmQEyYja1oyY0m+RFV0KUpO6LqU=
+react-native-fast-image@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.3.0.tgz#5821fac5e8759b3a87628600522eb72c579b0b9f"
+  integrity sha512-b0uhUEXKuIWY1WFai30i4LR99kF8OKoOjl6Yqcnc/bydkuE1r7oj0eUNifa7jwD4Pdpeff+uGMrEz27UMap0yQ==
 
 react-native-gesture-handler@^1.0.15:
   version "1.6.1"
