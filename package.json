@@ -16,7 +16,7 @@
     "lodash": "^4.17.21",
     "prop-types": "^15.6.2",
     "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react-native": "0.62.3",
     "react-native-easy-toast": "^1.1.0",
     "react-native-event-bus": "^1.0.0",
     "react-native-fade-in-view": "^1.0.6",
